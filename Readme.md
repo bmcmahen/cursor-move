@@ -12,17 +12,20 @@
 ## Usage
 
 ```javascript
-  var el = document.getElementsByTagName('div')[0];
-  var cursor = require('cursor-change')(el);
-  cursor.on('change', function(pos){
-    console.log('changed to', pos);
-  });
+var el = document.getElementsByTagName('div')[0];
+var cursor = require('cursor-change')(el);
+cursor.on('change', function(pos){
+  console.log('changed to', pos);
+});
 
-  setTimeout(function(){
-    cursor.unbind();
-  }, 10000);
+setTimeout(function(){
+  cursor.unbind();
+}, 10000);
 ```
 
+## Note
+
+This specifically does not emit an event for selections. For that, use `bmcmahen/monitor-text-selection`.
 
 ## License
 
