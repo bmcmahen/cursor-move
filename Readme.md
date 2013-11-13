@@ -9,8 +9,19 @@
 
     $ component install bmcmahen/cursor-change
 
-## API
+## Usage
 
+```javascript
+  var el = document.getElementsByTagName('div')[0];
+  var cursor = require('cursor-change')(el);
+  cursor.on('change', function(pos){
+    console.log('changed to', pos);
+  });
+
+  setTimeout(function(){
+    cursor.unbind();
+  }, 10000);
+```
 
 
 ## License
