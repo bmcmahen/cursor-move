@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+<div id='bacon' contenteditable='true'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi odio mauris, auctor ut varius non, tempus nec nisi. Quisque at tellus risus. Aliquam erat volutpat. Proin et dolor magna. Sed vel metus justo. Mauris eu metus massa. Duis viverra ultricies nisl, ut pharetra eros hendrerit non. Phasellus laoreet libero non eros rhoncus sed iaculis ante molestie. Etiam arcu purus, dictum a tincidunt id, ornare sed orci. Curabitur ornare ornare nulla quis tincidunt. Morbi nisi elit, mattis nec bibendum vel, facilisis eu ipsum. Phasellus non dolor erat, in placerat lacus. Aliquam pulvinar, est eu commodo vulputate, neque elit molestie lorem, sed vestibulum felis erat et risus. Nulla non velit odio.</div>
+
+<button id='unbindy'>unbind</button>
+<script src='build/build.js'></script>
+
+<script>
+var el = document.getElementsByTagName('div')[0];
+var cursor = require('cursor-change')(el);
+cursor.on('change', function(pos){
+  console.log('changed to', pos);
+});
+
+document.getElementById('unbindy').onclick = function(){
+  cursor.unbind();
+};
+
+setTimeout(function(){
+  cursor.unbind();
+}, 10000);
+
+</script>
+</body>
+</html>
