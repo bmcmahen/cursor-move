@@ -11,7 +11,11 @@
     "component/raf": "*",
     "component/event": "*"
   },
-  "development": {},
+  "development": {
+    "ianstormtaylor/trigger-event": "*",
+    "component/dom": "*",
+    "bmcmahen/selection-range": "*"
+  },
   "license": "MIT",
   "main": "index.js",
   "scripts": [
