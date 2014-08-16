@@ -1,53 +1,71 @@
-var Emitter = require('emitter');
-var events = require('events');
-var isKey = require('is-key');
+/**
+ * Module dependencies
+ */
+
 var getPosition = require('selection-range');
+var event = require('event');
+var Emitter = require('emitter');
 var raf = require('raf');
+var isKey = require('is-key');
+
+/**
+ * Listen for cursor movements
+ * @param  {Element} el
+ * @return {observeCursor}
+ */
 
 module.exports = function(el){
-
-  var observeCursor = {};
+  var observer = {};
   var position;
 
-  // detect if the cursor position has actually
-  // changed from last time.
-  var changedPosition = function(){
-    var pos = getPosition(el);
-    if (!pos || pos.start !== pos.end) return false;
-    if (pos.start !== position) {
-      position = pos.start;
-      return true;
-    }
-  };
+  /**
+   * Verify cursor position has changed
+   */
 
-  // if it has changed positions, emit change.
-  var emitChange = function(){
-    var id = raf(function(){
-      if (changedPosition()){
-        observeCursor.emit('change', position);
-      }
+  function hasChanged() {
+    var pos = getPosition(el);
+    if (!pos || (pos.start !== pos.end)) return false;
+    if (pos.start === position) return false;
+    position = pos.start;
+    return true;
+  }
+
+  /**
+   * Emit change event
+   */
+
+  function onChange() {
+    var id = raf(function () {
+      if (hasChanged()) observer.emit('change', position);
       raf.cancel(id);
     });
+  }
+
+  /**
+   * Determine if 'movement' keys are pressed
+   *
+   * @param {Event} e
+   */
+
+  function isMovementKey(e) {
+    if (!isKey(e, ['left', 'right', 'up', 'down'])) return;
+    onChange();
+  }
+
+  // Bind events
+  event.bind(el, 'mouseup', onChange);
+  event.bind(el, 'keyup', isMovementKey);
+
+  Emitter(observer);
+
+  /**
+   * Unbind helper
+   */
+
+  observer.unbind = function(){
+    event.unbind(el, 'mouseup', onChange);
+    event.unbind(el, 'keyup', isMovementKey);
   };
 
-  // event handlers.
-  observeCursor.onmouseup = emitChange;
-  observeCursor.onkeydown = function(e){
-    if (isKey(e, ['left', 'right', 'up', 'down'])) {
-      emitChange();
-    }
-  };
-
-  // bind events.
-  var changeEvents = events(el, observeCursor);
-  changeEvents.bind('keydown');
-  changeEvents.bind('mouseup');
-
-  Emitter(observeCursor);
-
-  observeCursor.unbind = function(){
-    changeEvents.unbind();
-  };
-
-  return observeCursor;
+  return observer;
 };
