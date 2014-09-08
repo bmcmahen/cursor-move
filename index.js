@@ -4,9 +4,9 @@
 
 var getPosition = require('selection-range');
 var event = require('event');
-var Emitter = require('emitter');
+var emitter = require('emitter');
 var raf = require('raf');
-var isKey = require('is-key');
+var arrowKey = require('is-key')('left', 'right', 'up', 'down');
 
 /**
  * Listen for cursor movements
@@ -48,7 +48,7 @@ module.exports = function(el){
    */
 
   function isMovementKey(e) {
-    if (!isKey(e, ['left', 'right', 'up', 'down'])) return;
+    if (!arrowKey(e)) return;
     onChange();
   }
 
@@ -56,7 +56,7 @@ module.exports = function(el){
   event.bind(el, 'mouseup', onChange);
   event.bind(el, 'keyup', isMovementKey);
 
-  Emitter(observer);
+  emitter(observer);
 
   /**
    * Unbind helper

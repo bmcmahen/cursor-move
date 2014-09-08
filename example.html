@@ -12,7 +12,7 @@
 
 <script>
 var el = document.getElementsByTagName('div')[0];
-var cursor = require('cursor-move')(el);
+var cursor = move(el);
 cursor.on('change', function(pos){
   console.log('changed to', pos);
 });

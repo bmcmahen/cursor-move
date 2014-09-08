@@ -5,15 +5,13 @@
 
 ## Installation
 
-  Install with [component(1)](http://component.io):
-
-    $ component install bmcmahen/cursor-change
+  Install with [component(1)](http://component.io) or [duo](http://github.com/duojs/duo)
 
 ## Usage
 
 ```javascript
 var el = document.getElementsByTagName('div')[0];
-var cursor = require('cursor-change')(el);
+var cursor = require('bmcmahen/cursor-change@1.0.0')(el);
 cursor.on('change', function(pos){
   console.log('changed to', pos);
 });
