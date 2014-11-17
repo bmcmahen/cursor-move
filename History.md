@@ -1,3 +1,6 @@
+## 1.0.0
+- add Package.json
+
 ## 0.1.1
 - pin bmcmahen/is-key dep and utilize its new api
 

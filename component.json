@@ -2,7 +2,7 @@
   "name": "cursor-move",
   "repo": "bmcmahen/cursor-move",
   "description": "an event emitter for when the cursor position is moved (manually) in a contenteditable document",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "keywords": [],
   "dependencies": {
     "bmcmahen/selection-range": "1.0.0",

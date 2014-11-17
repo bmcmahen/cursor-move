@@ -5,7 +5,9 @@
 
 ## Installation
 
-  Install with [component(1)](http://component.io) or [duo](http://github.com/duojs/duo)
+  Install with [component(1)](http://component.io) or [duo](http://github.com/duojs/duo) or NPM.
+
+  $npm install cursor-change
 
 ## Usage
 
