@@ -4,18 +4,9 @@
 
 var getPosition = require('selection-range');
 var arrowKey = require('is-key')('left', 'right', 'up', 'down');
-
-var event, emitter, raf;
-
-try {
-  event = require('event');
-  emitter = require('emitter');
-  raf = require('raf');
-} catch (e) {
-  event = require('component-event');
-  emitter = require('emitter-component');
-  raf = require('component-raf');
-}
+var event = require('event');
+var emitter = require('emitter');
+var raf = require('raf');
 
 /**
  * Listen for cursor movements
